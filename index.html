@@ -40,6 +40,71 @@
 </head>
 <body class="bg-white">
     <div class="min-h-screen bg-white">
+        <!-- Navigation Header -->
+        <header class="bg-white border-b border-gray-200 sticky top-0 z-40">
+            <div class="max-w-7xl mx-auto px-4">
+                <!-- Top Navigation Row -->
+                <div class="flex items-center justify-between py-4">
+                    <!-- Logo -->
+                    <div class="flex items-center">
+                        <div class="text-2xl font-bold text-primary-500">Nature's Seed</div>
+                    </div>
+                    
+                    <!-- Search Bar -->
+                    <div class="flex-1 max-w-md mx-8">
+                        <div class="relative">
+                            <input type="text" placeholder="Search seeds..." class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500">
+                            <svg class="absolute left-3 top-2.5 h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Side Actions -->
+                    <div class="flex items-center gap-4">
+                        <button class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md text-sm font-medium">
+                            📞 Call us now
+                        </button>
+                        <button class="text-gray-600 hover:text-gray-800">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                            </svg>
+                        </button>
+                        <button class="relative text-gray-600 hover:text-gray-800">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m6-5v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6m8 0V9a2 2 0 00-2-2H9a2 2 0 00-2 2v4.01"></path>
+                            </svg>
+                            <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Bottom Navigation Row -->
+                <div class="flex items-center justify-between py-3 border-t border-gray-100">
+                    <!-- Categories -->
+                    <nav class="flex items-center space-x-8">
+                        <a href="#" class="text-sm font-medium text-gray-700 hover:text-primary-500">Pasture</a>
+                        <a href="#" class="text-sm font-medium text-gray-700 hover:text-primary-500">Lawn</a>
+                        <a href="#" class="text-sm font-medium text-gray-700 hover:text-primary-500">Wildflower</a>
+                        <a href="#" class="text-sm font-medium text-gray-700 hover:text-primary-500">Specialty</a>
+                        <a href="#" class="text-sm font-medium text-gray-700 hover:text-primary-500">Planting Aids</a>
+                    </nav>
+                    
+                    <!-- Right Side Links -->
+                    <div class="flex items-center gap-6">
+                        <button onclick="openSeedFinder()" class="bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-md text-sm font-medium">
+                            🌱 Find the perfect seed for you
+                        </button>
+                        <div class="flex items-center gap-4 text-sm">
+                            <a href="#" class="text-gray-600 hover:text-primary-500">About us</a>
+                            <a href="#" class="text-gray-600 hover:text-primary-500">Resources</a>
+                            <a href="#" class="text-gray-600 hover:text-primary-500">Contact us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
         <!-- Product Hero -->
         <div class="max-w-7xl mx-auto px-4 py-8">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -220,6 +285,74 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seed Finder Modal -->
+        <div id="seedFinderModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+            <div class="flex items-center justify-center min-h-screen p-4">
+                <div class="bg-white rounded-lg max-w-lg w-full p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-semibold text-gray-900">Find Your Perfect Seed</h3>
+                        <button onclick="closeSeedFinder()" class="text-gray-400 hover:text-gray-600">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <!-- Step 1: Zip Code -->
+                    <div id="seedFinderStep1">
+                        <p class="text-gray-600 mb-4">First, let's determine your growing zone:</p>
+                        <input type="text" id="seedFinderZip" placeholder="Enter your zip code" maxlength="5" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 mb-4">
+                        <button onclick="seedFinderNextStep()" class="w-full bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-md">
+                            Continue
+                        </button>
+                    </div>
+                    
+                    <!-- Step 2: Category Selection -->
+                    <div id="seedFinderStep2" class="hidden">
+                        <p class="text-gray-600 mb-4">What type of seed are you looking for?</p>
+                        <div class="space-y-3 mb-4">
+                            <label class="flex items-center p-3 border border-gray-300 rounded-md hover:bg-gray-50 cursor-pointer">
+                                <input type="radio" name="seedCategory" value="pasture" class="h-4 w-4 text-primary-500">
+                                <div class="ml-3">
+                                    <div class="font-medium text-gray-900">Pasture Grass</div>
+                                    <div class="text-sm text-gray-500">For livestock grazing areas</div>
+                                </div>
+                            </label>
+                            <label class="flex items-center p-3 border border-gray-300 rounded-md hover:bg-gray-50 cursor-pointer">
+                                <input type="radio" name="seedCategory" value="lawn" class="h-4 w-4 text-primary-500">
+                                <div class="ml-3">
+                                    <div class="font-medium text-gray-900">Lawn Grass</div>
+                                    <div class="text-sm text-gray-500">For residential and commercial lawns</div>
+                                </div>
+                            </label>
+                            <label class="flex items-center p-3 border border-gray-300 rounded-md hover:bg-gray-50 cursor-pointer">
+                                <input type="radio" name="seedCategory" value="wildflower" class="h-4 w-4 text-primary-500">
+                                <div class="ml-3">
+                                    <div class="font-medium text-gray-900">Wildflowers</div>
+                                    <div class="text-sm text-gray-500">For natural landscapes and pollinator gardens</div>
+                                </div>
+                            </label>
+                            <label class="flex items-center p-3 border border-gray-300 rounded-md hover:bg-gray-50 cursor-pointer">
+                                <input type="radio" name="seedCategory" value="specialty" class="h-4 w-4 text-primary-500">
+                                <div class="ml-3">
+                                    <div class="font-medium text-gray-900">Specialty Seeds</div>
+                                    <div class="text-sm text-gray-500">Cover crops, erosion control, and more</div>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="flex gap-3">
+                            <button onclick="seedFinderPrevStep()" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-4 rounded-md">
+                                Back
+                            </button>
+                            <button onclick="findSeeds()" class="flex-1 bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-md">
+                                Find Seeds
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -481,6 +614,57 @@
             document.getElementById('resultContent').innerHTML = result;
             document.getElementById('zipCodeInput').classList.add('hidden');
             document.getElementById('areaResult').classList.remove('hidden');
+        }
+
+        // Seed Finder Functions
+        function openSeedFinder() {
+            document.getElementById('seedFinderModal').classList.remove('hidden');
+            document.getElementById('seedFinderZip').focus();
+        }
+
+        function closeSeedFinder() {
+            document.getElementById('seedFinderModal').classList.add('hidden');
+            resetSeedFinder();
+        }
+
+        function resetSeedFinder() {
+            document.getElementById('seedFinderStep1').classList.remove('hidden');
+            document.getElementById('seedFinderStep2').classList.add('hidden');
+            document.getElementById('seedFinderZip').value = '';
+            document.querySelectorAll('input[name="seedCategory"]').forEach(radio => radio.checked = false);
+        }
+
+        function seedFinderNextStep() {
+            const zipCode = document.getElementById('seedFinderZip').value.trim();
+            
+            if (!zipCode || zipCode.length !== 5 || !/^\d{5}$/.test(zipCode)) {
+                alert('Please enter a valid 5-digit zip code.');
+                return;
+            }
+
+            document.getElementById('seedFinderStep1').classList.add('hidden');
+            document.getElementById('seedFinderStep2').classList.remove('hidden');
+        }
+
+        function seedFinderPrevStep() {
+            document.getElementById('seedFinderStep2').classList.add('hidden');
+            document.getElementById('seedFinderStep1').classList.remove('hidden');
+        }
+
+        function findSeeds() {
+            const selectedCategory = document.querySelector('input[name="seedCategory"]:checked');
+            
+            if (!selectedCategory) {
+                alert('Please select a seed category.');
+                return;
+            }
+
+            const zipCode = document.getElementById('seedFinderZip').value;
+            const category = selectedCategory.value;
+            
+            // Simulate navigation to filtered category page
+            alert(`Redirecting to ${category} seeds for zip code ${zipCode}...`);
+            closeSeedFinder();
         }
 
         function addToCart() {
