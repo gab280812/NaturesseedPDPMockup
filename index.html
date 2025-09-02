@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horse Pasture Mix | Warm Season - Nature's Seed</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prata:wght@400&family=Mulish:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'pink-sunset': ['Prata', 'serif'],
+                        'mulish': ['Mulish', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            DEFAULT: '#69874b',
+                            500: '#69874b',
+                            600: '#5a7340',
+                        },
+                        accent: {
+                            DEFAULT: '#f4810f',
+                            500: '#f4810f',
+                            600: '#e06d0c',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Mulish', sans-serif; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Prata', serif; }
+        .star-filled { color: #fbbf24; fill: #fbbf24; }
+        .star-empty { color: #d1d5db; }
+        .gallery-thumb.active { border-color: #69874b; box-shadow: 0 0 0 2px rgba(105, 135, 75, 0.2); }
+    </style>
+</head>
+<body class="bg-white">
+    <div class="min-h-screen bg-white">
+        <!-- Product Hero -->
+        <div class="max-w-7xl mx-auto px-4 py-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Gallery -->
+                <div class="lg:col-span-7">
+                    <div class="space-y-4">
+                        <div class="relative group">
+                            <div class="aspect-square relative overflow-hidden rounded-lg bg-gray-100">
+                                <img id="mainImage" 
+                                     src="https://via.placeholder.com/800x800/69874b/ffffff?text=Horse+Pasture+Mix" 
+                                     alt="Horse Pasture Mix" 
+                                     class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="selectImage(0)" class="gallery-thumb active w-16 h-16 rounded-md overflow-hidden border-2">
+                                <img src="https://via.placeholder.com/64x64/69874b/ffffff?text=1" alt="Image 1" class="w-full h-full object-cover">
+                            </button>
+                            <button onclick="selectImage(1)" class="gallery-thumb w-16 h-16 rounded-md overflow-hidden border-2 border-gray-200">
+                                <img src="https://via.placeholder.com/64x64/8faa5c/ffffff?text=2" alt="Image 2" class="w-full h-full object-cover">
+                            </button>
+                            <button onclick="selectImage(2)" class="gallery-thumb w-16 h-16 rounded-md overflow-hidden border-2 border-gray-200">
+                                <img src="https://via.placeholder.com/64x64/a5c26d/ffffff?text=3" alt="Image 3" class="w-full h-full object-cover">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Purchase Panel -->
+                <div class="lg:col-span-5">
+                    <div class="space-y-6">
+                        <div>
+                            <h1 class="text-3xl font-bold text-gray-900 mb-2">Horse Pasture Mix | Warm Season</h1>
+                            <p class="text-lg text-gray-600 mb-3">Premium warm-season grass blend for southern horse pastures</p>
+                            
+                            <button onclick="openAreaChecker()" class="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 border border-blue-200 rounded-md text-blue-700 hover:bg-blue-100 transition-colors mb-4">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                                Does this seed work in my area?
+                            </button>
+                            
+                            <div class="flex items-center gap-2 mb-4">
+                                <div class="flex items-center">
+                                    <svg class="w-4 h-4 star-filled" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                    </svg>
+                                    <svg class="w-4 h-4 star-filled" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                    </svg>
+                                    <svg class="w-4 h-4 star-filled" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                    </svg>
+                                    <svg class="w-4 h-4 star-filled" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                    </svg>
+                                    <svg class="w-4 h-4 star-empty" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                    </svg>
+                                </div>
+                                <span class="text-sm font-medium">4.7</span>
+                                <span class="text-sm text-primary-500">(127 reviews)</span>
+                            </div>
+
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Free Returns</span>
+                                <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Fast Shipping</span>
+                                <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Quality Guarantee</span>
+                            </div>
+                        </div>
+
+                        <!-- Size Selection Panel -->
+                        <div class="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-sm font-medium text-gray-700">Select Size</span>
+                                <span class="text-xs text-gray-500">Coverage based on 4 lbs per 1,000 sq ft</span>
+                            </div>
+                            <div class="space-y-2">
+                                <label class="flex items-center justify-between p-3 border border-gray-300 rounded-md hover:bg-white cursor-pointer transition-colors">
+                                    <div class="flex items-center">
+                                        <input type="radio" name="variant" value="5lb" data-price="29.99" onchange="updateVariant()" class="h-4 w-4 text-primary-500 focus:ring-primary-500 border-gray-300">
+                                        <div class="ml-3">
+                                            <div class="text-sm font-medium text-gray-900">5 lb</div>
+                                            <div class="text-xs text-gray-500">Covers ~1,250 sq ft</div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="text-sm font-bold text-gray-900">$29.99</div>
+                                        <div class="text-xs text-gray-500">$5.99/lb</div>
+                                    </div>
+                                </label>
+                                <label class="flex items-center justify-between p-3 border-2 border-primary-500 bg-white rounded-md cursor-pointer">
+                                    <div class="flex items-center">
+                                        <input type="radio" name="variant" value="10lb" data-price="59.99" data-compare="69.99" onchange="updateVariant()" class="h-4 w-4 text-primary-500 focus:ring-primary-500 border-gray-300" checked>
+                                        <div class="ml-3">
+                                            <div class="flex items-center gap-2">
+                                                <span class="text-sm font-medium text-gray-900">10 lb</span>
+                                                <span class="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">Best Seller</span>
+                                            </div>
+                                            <div class="text-xs text-gray-500">Covers ~2,500 sq ft</div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="flex items-center gap-2">
+                                            <span class="text-sm font-bold text-gray-900">$59.99</span>
+                                            <span class="text-xs text-gray-500 line-through">$69.99</span>
+                                        </div>
+                                        <div class="text-xs text-primary-600 font-medium">$5.99/lb • Save $10</div>
+                                    </div>
+                                </label>
+                                <label class="flex items-center justify-between p-3 border border-gray-300 rounded-md hover:bg-white cursor-pointer transition-colors">
+                                    <div class="flex items-center">
+                                        <input type="radio" name="variant" value="25lb" data-price="129.99" data-compare="149.99" onchange="updateVariant()" class="h-4 w-4 text-primary-500 focus:ring-primary-500 border-gray-300">
+                                        <div class="ml-3">
+                                            <div class="text-sm font-medium text-gray-900">25 lb</div>
+                                            <div class="text-xs text-gray-500">Covers ~6,250 sq ft</div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="flex items-center gap-2">
+                                            <span class="text-sm font-bold text-gray-900">$129.99</span>
+                                            <span class="text-xs text-gray-500 line-through">$149.99</span>
+                                        </div>
+                                        <div class="text-xs text-primary-600 font-medium">$5.20/lb • Save $20</div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <p class="text-sm text-green-600 font-medium">✓ In Stock</p>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Quantity</label>
+                            <div class="flex items-center border border-gray-300 rounded-md w-32">
+                                <button onclick="decreaseQuantity()" class="h-10 w-10 flex items-center justify-center hover:bg-gray-50">-</button>
+                                <input id="quantityInput" type="number" value="1" min="1" class="border-0 text-center h-10 w-12 focus:outline-none">
+                                <button onclick="increaseQuantity()" class="h-10 w-10 flex items-center justify-center hover:bg-gray-50">+</button>
+                            </div>
+                        </div>
+
+                        <button onclick="addToCart()" id="addToCartBtn" class="w-full h-12 bg-accent-500 hover:bg-accent-600 text-white font-bold uppercase tracking-wide rounded-md shadow-md transition-colors">
+                            ADD TO CART
+                        </button>
+
+                        <div class="flex items-center justify-between">
+                            <button onclick="toggleWishlist()" id="wishlistBtn" class="flex items-center gap-2 text-gray-600 hover:text-red-500">
+                                ♡ Add to Wishlist
+                            </button>
+                            <button onclick="shareProduct()" class="p-2 text-gray-600 hover:text-gray-800">Share</button>
+                        </div>
+
+                        <!-- Price Information Panel -->
+                        <div class="mt-6 p-4 bg-gray-50 border border-gray-200 rounded-lg relative">
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm font-medium text-gray-700">Price Details</span>
+                                    <div class="flex items-center gap-2">
+                                        <span id="bestSellerBadge" class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800" style="display: inline-flex;">Best Seller</span>
+                                        <div id="discountBanner" class="inline-flex items-center px-2 py-1 rounded-full text-xs font-bold bg-red-500 text-white">
+                                            10% Bulk Discount
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-baseline justify-between">
+                                    <div class="flex items-baseline gap-3">
+                                        <span id="currentPrice" class="text-2xl font-bold text-gray-900">$59.99</span>
+                                        <span id="comparePrice" class="text-lg text-gray-500 line-through">$69.99</span>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="text-lg font-bold text-green-600">
+                                            <span>You Save </span>
+                                            <span id="totalSavings">$10.00</span>
+                                        </div>
+                                        <div class="text-sm text-gray-500">Total Savings</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Area Checker Modal -->
+        <div id="areaCheckerModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+            <div class="flex items-center justify-center min-h-screen p-4">
+                <div class="bg-white rounded-lg max-w-md w-full p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold text-gray-900">Check Growing Area</h3>
+                        <button onclick="closeAreaChecker()" class="text-gray-400 hover:text-gray-600">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="zipCodeInput">
+                        <p class="text-gray-600 mb-4">Enter your zip code to see if this seed mix works well in your area:</p>
+                        <input type="text" id="zipCode" placeholder="Enter zip code" maxlength="5" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4">
+                        <button onclick="checkArea()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md">
+                            Check Area
+                        </button>
+                    </div>
+                    <div id="areaResult" class="hidden">
+                        <div id="resultContent" class="text-center">
+                            <!-- Result content will be inserted here -->
+                        </div>
+                        <button onclick="resetAreaChecker()" class="w-full mt-4 bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-4 rounded-md">
+                            Check Another Area
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mix Composition -->
+        <section class="py-12 bg-gray-50">
+            <div class="max-w-6xl mx-auto px-4">
+                <h2 class="text-3xl font-bold text-gray-900 mb-8">What's in the Mix?</h2>
+                <div class="bg-white rounded-lg border border-gray-200 overflow-hidden">
+                    <table class="w-full">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Species</th>
+                                <th class="px-6 py-4 text-right text-sm font-semibold text-gray-900">Percentage</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            <tr><td class="px-6 py-4 text-sm font-medium text-gray-900">Bermuda Grass</td><td class="px-6 py-4 text-sm text-gray-600 text-right">25%</td></tr>
+                            <tr><td class="px-6 py-4 text-sm font-medium text-gray-900">Bahia Grass</td><td class="px-6 py-4 text-sm text-gray-600 text-right">20%</td></tr>
+                            <tr><td class="px-6 py-4 text-sm font-medium text-gray-900">Coastal Bermuda</td><td class="px-6 py-4 text-sm text-gray-600 text-right">15%</td></tr>
+                            <tr><td class="px-6 py-4 text-sm font-medium text-gray-900">Dallisgrass</td><td class="px-6 py-4 text-sm text-gray-600 text-right">12%</td></tr>
+                            <tr><td class="px-6 py-4 text-sm font-medium text-gray-900">Johnson Grass</td><td class="px-6 py-4 text-sm text-gray-600 text-right">10%</td></tr>
+                            <tr><td class="px-6 py-4 text-sm font-medium text-gray-900">Crimson Clover</td><td class="px-6 py-4 text-sm text-gray-600 text-right">8%</td></tr>
+                            <tr><td class="px-6 py-4 text-sm font-medium text-gray-900">Arrowleaf Clover</td><td class="px-6 py-4 text-sm text-gray-600 text-right">5%</td></tr>
+                            <tr><td class="px-6 py-4 text-sm font-medium text-gray-900">Annual Ryegrass</td><td class="px-6 py-4 text-sm text-gray-600 text-right">5%</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reviews Section -->
+        <section class="py-12">
+            <div class="max-w-6xl mx-auto px-4">
+                <h2 class="text-3xl font-bold text-gray-900 mb-8">Customer Reviews</h2>
+                <div class="space-y-6">
+                    <div class="bg-white rounded-lg border border-gray-200 p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="flex text-yellow-400">★★★★★</div>
+                            <span class="ml-2 text-sm font-medium">Excellent results in Georgia</span>
+                        </div>
+                        <p class="text-gray-700">Planted this mix last spring and it established beautifully. My horses love grazing on it and it's held up well to heavy traffic.</p>
+                        <p class="text-sm text-gray-500 mt-2">- Sarah M. • Verified Purchase</p>
+                    </div>
+                    <div class="bg-white rounded-lg border border-gray-200 p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="flex text-yellow-400">★★★★☆</div>
+                            <span class="ml-2 text-sm font-medium">Good mix, slow start</span>
+                        </div>
+                        <p class="text-gray-700">Quality seed mix that eventually established well. Took a bit longer than expected to germinate, but once it got going it filled in nicely.</p>
+                        <p class="text-sm text-gray-500 mt-2">- Mike R. • Verified Purchase</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const images = [
+            'https://via.placeholder.com/800x800/69874b/ffffff?text=Horse+Pasture+Mix',
+            'https://via.placeholder.com/800x800/8faa5c/ffffff?text=Horses+Grazing',
+            'https://via.placeholder.com/800x800/a5c26d/ffffff?text=Grass+Close-up'
+        ];
+        let currentImageIndex = 0;
+
+        function selectImage(index) {
+            currentImageIndex = index;
+            document.getElementById('mainImage').src = images[index];
+            
+            // Update thumbnails
+            document.querySelectorAll('.gallery-thumb').forEach((thumb, i) => {
+                if (i === index) {
+                    thumb.classList.add('active');
+                } else {
+                    thumb.classList.remove('active');
+                }
+            });
+        }
+
+        function updateVariant() {
+            const selectedRadio = document.querySelector('input[name="variant"]:checked');
+            if (!selectedRadio) return;
+            
+            const price = parseFloat(selectedRadio.dataset.price);
+            const comparePrice = selectedRadio.dataset.compare ? parseFloat(selectedRadio.dataset.compare) : null;
+            const variant = selectedRadio.value;
+            
+            // Extract weight from variant (5lb, 10lb, 25lb)
+            const weight = parseInt(variant.replace('lb', ''));
+            
+            // Update main price
+            document.getElementById('currentPrice').textContent = '$' + price.toFixed(2);
+            
+            // Update compare price
+            const comparePriceEl = document.getElementById('comparePrice');
+            if (comparePrice) {
+                comparePriceEl.textContent = '$' + comparePrice.toFixed(2);
+                comparePriceEl.style.display = 'inline';
+            } else {
+                comparePriceEl.style.display = 'none';
+            }
+            
+            // Price per pound is now handled in the size selector, no need to update here
+            
+            // Update discount banner, best seller badge, and total savings
+            const discountBannerEl = document.getElementById('discountBanner');
+            const bestSellerBadgeEl = document.getElementById('bestSellerBadge');
+            const totalSavingsEl = document.getElementById('totalSavings');
+            
+            if (variant === '10lb') {
+                discountBannerEl.textContent = '10% Bulk Discount';
+                discountBannerEl.style.display = 'inline-flex';
+                bestSellerBadgeEl.style.display = 'inline-flex';
+                if (comparePrice) {
+                    const savings = comparePrice - price;
+                    totalSavingsEl.textContent = '$' + savings.toFixed(2);
+                }
+            } else if (variant === '25lb') {
+                discountBannerEl.textContent = '15% Bulk Discount';
+                discountBannerEl.style.display = 'inline-flex';
+                bestSellerBadgeEl.style.display = 'none';
+                if (comparePrice) {
+                    const savings = comparePrice - price;
+                    totalSavingsEl.textContent = '$' + savings.toFixed(2);
+                }
+            } else {
+                discountBannerEl.style.display = 'none';
+                bestSellerBadgeEl.style.display = 'none';
+                totalSavingsEl.textContent = '$0.00';
+            }
+            
+            // Update visual selection state
+            document.querySelectorAll('input[name="variant"]').forEach(radio => {
+                const label = radio.closest('label');
+                if (radio.checked) {
+                    label.classList.add('border-2', 'border-primary-500', 'bg-primary-50');
+                    label.classList.remove('border', 'border-gray-300');
+                } else {
+                    label.classList.add('border', 'border-gray-300');
+                    label.classList.remove('border-2', 'border-primary-500', 'bg-primary-50');
+                }
+            });
+        }
+
+        function decreaseQuantity() {
+            const input = document.getElementById('quantityInput');
+            const current = parseInt(input.value);
+            if (current > 1) {
+                input.value = current - 1;
+            }
+        }
+
+        function increaseQuantity() {
+            const input = document.getElementById('quantityInput');
+            const current = parseInt(input.value);
+            input.value = current + 1;
+        }
+
+        // Area Checker Functions
+        function openAreaChecker() {
+            document.getElementById('areaCheckerModal').classList.remove('hidden');
+            document.getElementById('zipCode').focus();
+        }
+
+        function closeAreaChecker() {
+            document.getElementById('areaCheckerModal').classList.add('hidden');
+            resetAreaChecker();
+        }
+
+        function resetAreaChecker() {
+            document.getElementById('zipCodeInput').classList.remove('hidden');
+            document.getElementById('areaResult').classList.add('hidden');
+            document.getElementById('zipCode').value = '';
+        }
+
+        function checkArea() {
+            const zipCode = document.getElementById('zipCode').value.trim();
+            
+            if (!zipCode || zipCode.length !== 5 || !/^\d{5}$/.test(zipCode)) {
+                alert('Please enter a valid 5-digit zip code.');
+                return;
+            }
+
+            // Simple zip code to region mapping (simplified for demo)
+            const zipNum = parseInt(zipCode);
+            let result = '';
+            
+            // Southern/Warm Season zones (approximate)
+            if ((zipNum >= 30000 && zipNum <= 39999) || // GA, FL, AL, MS, SC, NC, TN
+                (zipNum >= 70000 && zipNum <= 79999) || // TX, LA, AR, OK
+                (zipNum >= 80000 && zipNum <= 89999) || // AZ, NV, UT, CO (southern parts)
+                (zipNum >= 90000 && zipNum <= 96999)) { // CA, HI (southern/warm areas)
+                
+                result = `
+                    <div class="text-green-600 mb-4">
+                        <svg class="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <h4 class="text-lg font-semibold text-gray-900">Perfect Match!</h4>
+                        <p class="text-gray-600 mt-2">Yes, this seed works well in your area (${zipCode}). This warm-season grass blend is ideal for your climate zone.</p>
+                    </div>
+                `;
+            } else {
+                // Northern/Transitional zones
+                result = `
+                    <div class="text-orange-600 mb-4">
+                        <svg class="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.732 15.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                        </svg>
+                        <h4 class="text-lg font-semibold text-gray-900">Not Ideal for Your Area</h4>
+                        <p class="text-gray-600 mt-2">This seed is not optimal for your area (${zipCode}). Consider these alternatives:</p>
+                        <div class="mt-4 space-y-2">
+                            <a href="#" class="block p-3 bg-blue-50 border border-blue-200 rounded-md hover:bg-blue-100">
+                                <div class="font-medium text-blue-900">Horse Transitional Area Mix</div>
+                                <div class="text-sm text-blue-700">Better suited for transitional climate zones</div>
+                            </a>
+                            <a href="#" class="block p-3 bg-blue-50 border border-blue-200 rounded-md hover:bg-blue-100">
+                                <div class="font-medium text-blue-900">Horse Northern Areas Mix</div>
+                                <div class="text-sm text-blue-700">Designed for cooler northern climates</div>
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }
+
+            document.getElementById('resultContent').innerHTML = result;
+            document.getElementById('zipCodeInput').classList.add('hidden');
+            document.getElementById('areaResult').classList.remove('hidden');
+        }
+
+        function addToCart() {
+            const btn = document.getElementById('addToCartBtn');
+            btn.textContent = 'ADDING...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                btn.textContent = 'ADDED TO CART ✓';
+                setTimeout(() => {
+                    btn.textContent = 'ADD TO CART';
+                    btn.disabled = false;
+                }, 2000);
+            }, 1000);
+        }
+
+        function toggleWishlist() {
+            const btn = document.getElementById('wishlistBtn');
+            if (btn.innerHTML.includes('♡')) {
+                btn.innerHTML = '♥ Added to Wishlist';
+                btn.classList.add('text-red-500');
+            } else {
+                btn.innerHTML = '♡ Add to Wishlist';
+                btn.classList.remove('text-red-500');
+            }
+        }
+
+        function shareProduct() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Horse Pasture Mix | Warm Season',
+                    text: 'Check out this premium grass seed mix!',
+                    url: window.location.href
+                });
+            } else {
+                navigator.clipboard.writeText(window.location.href);
+                alert('Link copied to clipboard!');
+            }
+        }
+    </script>
+</body>
+</html>
