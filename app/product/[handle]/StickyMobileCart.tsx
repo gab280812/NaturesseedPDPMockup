@@ -69,28 +69,28 @@ export default function StickyMobileCart({
         </div>
 
         {/* Quantity Controls */}
-        <div className="flex items-center border border-gray-300 rounded-md">
+        <div className="flex items-center border border-gray-300 rounded-md bg-white">
           <Button
             variant="ghost"
             size="sm"
-            className="h-8 w-8 rounded-none"
+            className="h-10 w-10 rounded-none hover:bg-gray-50"
             onClick={() => onQuantityChange(Math.max(1, quantity - 1))}
             disabled={quantity <= 1}
             aria-label="Decrease quantity"
           >
-            <Minus className="h-3 w-3" />
+            <Minus className="h-4 w-4" />
           </Button>
-          <span className="px-3 py-1 text-sm font-medium min-w-[2rem] text-center">
+          <span className="px-3 py-2 text-base font-medium min-w-[3rem] text-center">
             {quantity}
           </span>
           <Button
             variant="ghost"
             size="sm"
-            className="h-8 w-8 rounded-none"
+            className="h-10 w-10 rounded-none hover:bg-gray-50"
             onClick={() => onQuantityChange(quantity + 1)}
             aria-label="Increase quantity"
           >
-            <Plus className="h-3 w-3" />
+            <Plus className="h-4 w-4" />
           </Button>
         </div>
 

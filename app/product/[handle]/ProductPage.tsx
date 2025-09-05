@@ -13,6 +13,8 @@ import ProductUses from './ProductUses';
 import QA from './QA';
 import Reviews from './Reviews';
 import StickyMobileCart from './StickyMobileCart';
+import ProductSecondaryActions from './ProductSecondaryActions';
+import Header from '@/components/Header';
 import { gaViewItem } from '@/lib/analytics/ga4';
 
 interface ProductPageProps {
@@ -84,12 +86,15 @@ export default function ProductPage({ product }: ProductPageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
+      {/* Header */}
+      <Header />
+
       <div className="min-h-screen bg-white">
         {/* Above the Fold - Product Hero */}
-        <div className="max-w-7xl mx-auto px-4 py-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 lg:gap-8">
             {/* Product Gallery - Left Side (cols 1-7) */}
-            <div className="lg:col-span-7">
+            <div className="lg:col-span-7 order-1">
               <ProductGallery
                 images={product.images}
                 productTitle={product.title}
@@ -97,55 +102,69 @@ export default function ProductPage({ product }: ProductPageProps) {
                   // Optional: track image selection
                 }}
               />
+              
+              {/* Secondary Actions below image - Hidden on mobile */}
+              <div className="hidden lg:block">
+                <ProductSecondaryActions product={product} />
+              </div>
             </div>
 
             {/* Purchase Panel - Right Side (cols 8-12) */}
-            <div className="lg:col-span-5">
-              <PurchasePanel
-                product={product}
-                onVariantChange={(variant) => {
-                  setSelectedVariant(variant);
-                }}
-              />
+            <div className="lg:col-span-5 order-2">
+              <div className="lg:sticky lg:top-24">
+                <PurchasePanel
+                  product={product}
+                  onVariantChange={(variant) => {
+                    setSelectedVariant(variant);
+                  }}
+                />
+              </div>
+            </div>
+
+            {/* Secondary Actions for mobile - Below purchase panel */}
+            <div className="lg:hidden order-3 col-span-1">
+              <ProductSecondaryActions product={product} />
             </div>
           </div>
         </div>
 
         {/* Below the Fold - Product Details */}
-        <div className="space-y-0">
-          {/* Mix Composition */}
-          <MixComposition mix={product.mix} />
+        <div className="space-y-0 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto">
+            {/* Mix Composition */}
+            <MixComposition mix={product.mix} />
 
-          {/* Specifications */}
-          <SpecsTable specs={product.specs} />
+            {/* Specifications */}
+            <SpecsTable specs={product.specs} />
 
-          {/* Why Choose This Seed */}
-          <WhyChoose />
+            {/* Why Choose This Seed */}
+            <WhyChoose />
 
-          {/* Seed Description with Region Map */}
-          <SeedDescription
-            descriptionHtml={product.descriptionHtml}
-            regionMap={product.regionMap}
-          />
+            {/* Seed Description with Region Map */}
+            <SeedDescription
+              descriptionHtml={product.descriptionHtml}
+              regionMap={product.regionMap}
+            />
 
-          {/* Product Details Table */}
-          <ProductDetailsTable
-            details={product.details}
-            productTitle={product.title}
-          />
+            {/* Product Details Table */}
+            <ProductDetailsTable
+              details={product.details}
+              productTitle={product.title}
+            />
 
-          {/* Product Uses */}
-          <ProductUses uses={product.uses} />
+            {/* Product Uses */}
+            <ProductUses uses={product.uses} />
 
-          {/* Questions & Answers */}
-          <QA qa={product.qa} productId={product.id} />
+            {/* Questions & Answers */}
+            <QA qa={product.qa} productId={product.id} />
 
-          {/* Reviews */}
-          <Reviews
-            reviews={product.reviews}
-            productId={product.id}
-            rating={product.rating}
-          />
+            {/* Reviews */}
+            <Reviews
+              reviews={product.reviews}
+              productId={product.id}
+              rating={product.rating}
+            />
+          </div>
         </div>
 
         {/* Sticky Mobile Cart */}
@@ -157,7 +176,7 @@ export default function ProductPage({ product }: ProductPageProps) {
         />
 
         {/* Bottom Padding for Mobile Sticky Cart */}
-        <div className="h-20 md:h-0" />
+        <div className="h-24 md:h-0" />
       </div>
     </>
   );

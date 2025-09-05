@@ -1,15 +1,14 @@
 "use client"
 
 import { useState } from 'react';
-import { Star, Heart, Share2, Minus, Plus, Calculator } from 'lucide-react';
+import { Star, Minus, Plus, Circle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { Variant, Product } from './types';
-import { addToCart, toggleWishlist } from '@/lib/commerce';
-import CoverageCalculator from './CoverageCalculator';
+import { addToCart } from '@/lib/commerce';
+import PlantingAids from './PlantingAids';
 
 interface PurchasePanelProps {
   product: Product;
@@ -19,9 +18,7 @@ interface PurchasePanelProps {
 export default function PurchasePanel({ product, onVariantChange }: PurchasePanelProps) {
   const [selectedVariantId, setSelectedVariantId] = useState(product.defaultVariantId);
   const [quantity, setQuantity] = useState(1);
-  const [isWishlisted, setIsWishlisted] = useState(false);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
-  const [showCalculator, setShowCalculator] = useState(false);
 
   const selectedVariant = product.variants.find(v => v.id === selectedVariantId) || product.variants[0];
 
@@ -81,37 +78,6 @@ export default function PurchasePanel({ product, onVariantChange }: PurchasePane
     }
   };
 
-  const handleWishlistToggle = async () => {
-    try {
-      const newState = await toggleWishlist(product.id);
-      setIsWishlisted(newState);
-    } catch (error) {
-      console.error('Failed to toggle wishlist:', error);
-    }
-  };
-
-  const handleShare = async () => {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: product.title,
-          text: product.subtitle || product.title,
-          url: window.location.href,
-        });
-      } catch (error) {
-        // User cancelled or error occurred
-      }
-    } else {
-      // Fallback: copy to clipboard
-      try {
-        await navigator.clipboard.writeText(window.location.href);
-        // Show tooltip "Link copied" (would implement with tooltip component)
-        console.log('Link copied to clipboard');
-      } catch (error) {
-        console.error('Failed to copy link:', error);
-      }
-    }
-  };
 
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }, (_, i) => (
@@ -165,44 +131,126 @@ export default function PurchasePanel({ product, onVariantChange }: PurchasePane
         )}
       </div>
 
-      {/* Variant Selection */}
+      {/* Also Safe for Animals */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          Size
+        <label className="block text-sm font-medium text-gray-700 mb-3">
+          {/* Bottom Padding for Mobile Sticky Cart */}
+        <div className="h-24 md:h-0" />
         </label>
-        <Select value={selectedVariantId} onValueChange={handleVariantChange}>
-          <SelectTrigger className="w-full">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            {product.variants.map((variant) => (
-              <SelectItem key={variant.id} value={variant.id}>
-                <div className="flex justify-between items-center w-full">
-                  <span>{variant.title}</span>
-                  <span className="ml-2 font-medium">
-                    ${variant.price.toFixed(2)}
-                    {variant.compareAtPrice && (
-                      <span className="ml-1 text-sm text-gray-500 line-through">
-                        ${variant.compareAtPrice.toFixed(2)}
-                      </span>
-                    )}
-                  </span>
-                </div>
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        <div className="flex flex-wrap gap-2">
+          <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-orange-100 text-orange-800 border border-orange-200">
+            <Circle className="h-3 w-3 mr-1.5 fill-current" />
+            Horse
+          </span>
+          <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-700 border border-gray-200">
+            <Circle className="h-3 w-3 mr-1.5 fill-current" />
+            Cattle
+          </span>
+          <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-700 border border-gray-200">
+            <Circle className="h-3 w-3 mr-1.5 fill-current" />
+            Sheep
+          </span>
+          <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-700 border border-gray-200">
+            <Circle className="h-3 w-3 mr-1.5 fill-current" />
+            Goats
+          </span>
+          <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-700 border border-gray-200">
+            <Circle className="h-3 w-3 mr-1.5 fill-current" />
+            Wildlife
+          </span>
+        </div>
       </div>
 
-      {/* Price */}
-      <div className="flex items-baseline gap-2">
-        <span className="text-3xl font-bold text-gray-900">
-          ${selectedVariant.price.toFixed(2)}
-        </span>
+      {/* Variant Selection - Radio Buttons */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-3">
+          Size
+        </label>
+        <div className="space-y-2 sm:space-y-3">
+          {product.variants.map((variant, index) => {
+            const isSelected = selectedVariantId === variant.id;
+            const bulkDiscount = index === 1 ? '10% bulk discount' : index === 2 ? '15% bulk discount' : null;
+            const isBestSeller = index === 1;
+            
+            return (
+              <div
+                key={variant.id}
+                className={cn(
+                  "relative border rounded-lg p-2 sm:p-3 cursor-pointer transition-colors",
+                  isSelected ? "border-green-500 bg-green-50" : "border-gray-200 hover:border-gray-300"
+                )}
+                onClick={() => handleVariantChange(variant.id)}
+              >
+                <div className="flex items-center">
+                  <input
+                    type="radio"
+                    id={variant.id}
+                    name="variant"
+                    value={variant.id}
+                    checked={isSelected}
+                    onChange={() => handleVariantChange(variant.id)}
+                    className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300"
+                  />
+                  <div className="ml-3 flex-1 min-w-0">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-1 sm:gap-2 flex-wrap">
+                        <label htmlFor={variant.id} className="text-sm font-medium text-gray-900 cursor-pointer">
+                          {variant.title}
+                        </label>
+                        {bulkDiscount && (
+                          <Badge variant="secondary" className="text-xs bg-orange-100 text-orange-800">
+                            {bulkDiscount}
+                          </Badge>
+                        )}
+                        {isBestSeller && (
+                          <Badge variant="secondary" className="text-xs bg-blue-100 text-blue-800">
+                            Best Seller
+                          </Badge>
+                        )}
+                      </div>
+                      <div className="text-right flex-shrink-0">
+                        <div className="text-sm font-bold text-gray-900">
+                          ${variant.price}
+                        </div>
+                        <div className="text-xs text-gray-500">
+                          ${(variant.price / parseFloat(variant.title.split(' ')[0])).toFixed(2)}/lb
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Price and Savings */}
+      <div className="bg-gray-50 rounded-lg p-4">
+        <div className="flex items-center justify-between mb-2">
+          <div className="flex items-baseline gap-2">
+            <span className="text-3xl font-bold text-gray-900">
+              ${selectedVariant.price.toFixed(2)}
+            </span>
+            {selectedVariant.compareAtPrice && (
+              <span className="text-xl text-gray-500 line-through">
+                ${selectedVariant.compareAtPrice.toFixed(2)}
+              </span>
+            )}
+          </div>
+          <div className="text-right">
+            <div className="text-sm font-bold text-orange-600 uppercase tracking-wide">
+              BUY MORE,
+            </div>
+            <div className="text-sm font-bold text-orange-600 uppercase tracking-wide">
+              PAY LESS
+            </div>
+          </div>
+        </div>
         {selectedVariant.compareAtPrice && (
-          <span className="text-xl text-gray-500 line-through">
-            ${selectedVariant.compareAtPrice.toFixed(2)}
-          </span>
+          <div className="text-green-600 font-medium">
+            You saved ${(selectedVariant.compareAtPrice - selectedVariant.price).toFixed(2)}
+          </div>
         )}
       </div>
 
@@ -217,136 +265,56 @@ export default function PurchasePanel({ product, onVariantChange }: PurchasePane
 
       {/* Quantity Selector */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className="block text-sm font-medium text-gray-700 mb-3">
           Quantity
         </label>
-        <div className="flex items-center border border-gray-300 rounded-md w-32">
+        <div className="flex items-center border border-gray-300 rounded-md w-28 sm:w-32">
           <Button
+            type="button"
             variant="ghost"
             size="sm"
-            className="h-10 w-10 rounded-none"
+            className="h-10 w-8 sm:w-10 rounded-none"
             onClick={() => handleQuantityChange(quantity - 1)}
             disabled={quantity <= 1}
             aria-label="Decrease quantity"
           >
-            <Minus className="h-4 w-4" />
+            <Minus className="h-3 w-3 sm:h-4 sm:w-4" />
           </Button>
           <Input
             type="number"
             value={quantity}
             onChange={(e) => handleQuantityChange(parseInt(e.target.value) || 1)}
-            className="border-0 text-center h-10 w-12 rounded-none focus-visible:ring-0"
+            className="h-10 text-center border-0 rounded-none focus:ring-0 focus:border-0 text-sm"
             min="1"
+            aria-label="Quantity"
           />
           <Button
+            type="button"
             variant="ghost"
             size="sm"
-            className="h-10 w-10 rounded-none"
+            className="h-10 w-8 sm:w-10 rounded-none"
             onClick={() => handleQuantityChange(quantity + 1)}
             aria-label="Increase quantity"
           >
-            <Plus className="h-4 w-4" />
+            <Plus className="h-3 w-3 sm:h-4 sm:w-4" />
           </Button>
         </div>
       </div>
 
-      {/* Coverage Calculator Link */}
-      <Dialog open={showCalculator} onOpenChange={setShowCalculator}>
-        <DialogTrigger asChild>
-          <Button variant="link" className="p-0 h-auto text-primary">
-            <Calculator className="h-4 w-4 mr-1" />
-            Coverage Calculator
-          </Button>
-        </DialogTrigger>
-        <DialogContent className="max-w-md">
-          <DialogHeader>
-            <DialogTitle>Coverage Calculator</DialogTitle>
-          </DialogHeader>
-          <CoverageCalculator
-            variants={product.variants}
-            specs={product.specs}
-            onApplyQuantity={(qty) => {
-              setQuantity(qty);
-              setShowCalculator(false);
-            }}
-          />
-        </DialogContent>
-      </Dialog>
 
-      {/* Add to Cart Button */}
+      {/* Add to Cart Button - Hidden on mobile (replaced by sticky cart) */}
       <Button
         variant="accent"
         size="lg"
-        className="w-full h-12 text-base"
+        className="w-full h-12 text-base hidden md:flex"
         onClick={handleAddToCart}
         disabled={!selectedVariant.inStock || isAddingToCart}
       >
         {isAddingToCart ? 'Adding...' : 'ADD TO CART'}
       </Button>
 
-      {/* Secondary Actions */}
-      <div className="flex items-center justify-between">
-        <Button
-          variant="ghost"
-          className="flex items-center gap-2"
-          onClick={handleWishlistToggle}
-        >
-          <Heart className={cn("h-4 w-4", isWishlisted && "fill-red-500 text-red-500")} />
-          Add to Wishlist
-        </Button>
-        
-        <Button variant="ghost" size="icon" onClick={handleShare} aria-label="Share product">
-          <Share2 className="h-4 w-4" />
-        </Button>
-      </div>
-
-      {/* Trust Badges */}
-      <div className="border-t pt-4">
-        <div className="grid grid-cols-3 gap-4 text-center">
-          <div className="text-xs text-gray-600">
-            <div className="w-8 h-8 mx-auto mb-1 bg-gray-100 rounded-full flex items-center justify-center">
-              🚚
-            </div>
-            Free Shipping
-          </div>
-          <div className="text-xs text-gray-600">
-            <div className="w-8 h-8 mx-auto mb-1 bg-gray-100 rounded-full flex items-center justify-center">
-              ↩️
-            </div>
-            Easy Returns
-          </div>
-          <div className="text-xs text-gray-600">
-            <div className="w-8 h-8 mx-auto mb-1 bg-gray-100 rounded-full flex items-center justify-center">
-              ✅
-            </div>
-            Quality Guarantee
-          </div>
-        </div>
-      </div>
-
-      {/* Quick Links */}
-      <div className="border-t pt-4 space-y-2">
-        <a
-          href="#mix"
-          className="block text-sm text-primary hover:underline"
-          onClick={(e) => {
-            e.preventDefault();
-            document.getElementById('mix')?.scrollIntoView({ behavior: 'smooth' });
-          }}
-        >
-          → What's in the mix?
-        </a>
-        <a
-          href="#specs"
-          className="block text-sm text-primary hover:underline"
-          onClick={(e) => {
-            e.preventDefault();
-            document.getElementById('specs')?.scrollIntoView({ behavior: 'smooth' });
-          }}
-        >
-          → View specifications
-        </a>
-      </div>
+      {/* Planting Aids Section */}
+      <PlantingAids productTitle={product.title} selectedVariantSize={selectedVariant.title} />
     </div>
   );
 }

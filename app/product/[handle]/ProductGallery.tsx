@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { ChevronLeft, ChevronRight, Expand } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Expand, CheckCircle, ClipboardCheck, Globe, BookOpen } from 'lucide-react';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -171,6 +171,51 @@ export default function ProductGallery({ images, productTitle, onImageSelect }: 
           ))}
         </div>
       )}
+
+      {/* Unique Sales Propositions */}
+      <div className="mt-6 pt-6 border-t border-gray-200">
+        <div className="grid grid-cols-2 gap-4">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+              <CheckCircle className="w-4 h-4 text-green-600" />
+            </div>
+            <div>
+              <p className="text-sm font-medium text-gray-900">Free from Fillers</p>
+              <p className="text-xs text-gray-500">and Endophytes</p>
+            </div>
+          </div>
+          
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+              <ClipboardCheck className="w-4 h-4 text-blue-600" />
+            </div>
+            <div>
+              <p className="text-sm font-medium text-gray-900">Rigorous Quality</p>
+              <p className="text-xs text-gray-500">Control</p>
+            </div>
+          </div>
+          
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0">
+              <Globe className="w-4 h-4 text-amber-600" />
+            </div>
+            <div>
+              <p className="text-sm font-medium text-gray-900">Farm Direct, Non-GMO</p>
+              <p className="text-xs text-gray-500">& Sustainably Sourced</p>
+            </div>
+          </div>
+          
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
+              <BookOpen className="w-4 h-4 text-purple-600" />
+            </div>
+            <div>
+              <p className="text-sm font-medium text-gray-900">Crafted by</p>
+              <p className="text-xs text-gray-500">Experts</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
